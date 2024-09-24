@@ -1,0 +1,24 @@
+load("//tools/ts_project:index.bzl", "ts_project")
+
+package(default_visibility = ["//visibility:public"])
+
+ts_project(
+    name = "common",
+    package_name = "@spica-server/bucket/common",
+    srcs = glob(
+        include = ["*.ts"],
+    ),
+    deps = [
+        "//packages/core/differ",
+        "//packages/core/patch",
+        "//packages/database",
+        "//packages/database/pipeline",
+        "//packages/filter",
+        "//apps/api/activity/services",
+        "//apps/api/bucket/cache",
+        "//apps/api/bucket/expression",
+        "//apps/api/bucket/services",
+        "@npm//json-merge-patch",
+        "@npm//locale",
+    ],
+)

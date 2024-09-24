@@ -40,10 +40,10 @@ echo $BAZEL
 echo ""
 echo "## Bazel targets to publish"
 # Docker packages
-DOCKER_IMAGE_LABELS=`$BAZEL query --output=label --noshow_progress 'attr("tags", "\[.*release-with-spica.*\]", //stacks/... + //tools/...) intersect kind("container_push", //stacks/... + //tools/...)'`
+DOCKER_IMAGE_LABELS=`$BAZEL query --output=label --noshow_progress 'attr("tags", "\[.*release-with-spica.*\]", //apps/... + //tools/...) intersect kind("container_push", //apps/... + //tools/...)'`
 
 # Npm packages
-NPM_PACKAGE_LABELS=`$BAZEL query --output=label --noshow_progress 'attr("tags", "\[.*release-with-spica.*\]", //stacks/...) intersect kind("pkg_.*", //stacks/...)'`
+NPM_PACKAGE_LABELS=`$BAZEL query --output=label --noshow_progress 'attr("tags", "\[.*release-with-spica.*\]", //apps/...) intersect kind("pkg_.*", //apps/...)'`
 
 echo $DOCKER_IMAGE_LABELS $NPM_PACKAGE_LABELS
 
@@ -51,7 +51,7 @@ echo $DOCKER_IMAGE_LABELS $NPM_PACKAGE_LABELS
 # Once we migrate client to bazel we'll get rid of these steps
 echo ""
 echo "## Building spica"
-yarn --cwd=stacks/spica --silent ng build --prod --progress=false
+yarn --cwd=apps/spica --silent ng build --prod --progress=false
 
 echo ""
 echo "## Building bazel generated artifacts in parallel"

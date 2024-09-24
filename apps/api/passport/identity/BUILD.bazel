@@ -1,0 +1,33 @@
+load("//tools/ts_project:index.bzl", "ts_project")
+
+package(default_visibility = ["//visibility:public"])
+
+ts_project(
+    name = "identity",
+    package_name = "@spica-server/passport/identity",
+    srcs = glob([
+        "index.ts",
+        "src/*.ts",
+        "src/schemas/*.json",
+    ]),
+    deps = [
+        "//packages/core",
+        "//packages/core/differ",
+        "//packages/core/schema",
+        "//packages/database",
+        "//packages/interface/representative",
+        "//apps/api/activity/services",
+        "//apps/api/asset",
+        "//apps/api/bucket/common",
+        "//apps/api/passport/authfactor",
+        "//apps/api/passport/guard",
+        "//apps/api/passport/policy",
+        "//apps/api/preference/services",
+        "//apps/api/status",
+        "@npm//@nestjs/common",
+        "@npm//@nestjs/jwt",
+        "@npm//@nestjs/passport",
+        "@npm//bcryptjs",
+        "@npm//passport-jwt",
+    ],
+)

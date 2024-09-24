@@ -24,17 +24,17 @@ BUILD_CLIENT=${2:-false}
 
 BAZEL=$(yarn bin bazelisk)
 
-$BAZEL run //stacks/api:image --platforms=@build_bazel_rules_nodejs//toolchains/node:linux_amd64 --config=release -- --norun
+$BAZEL run //apps/api:image --platforms=@build_bazel_rules_nodejs//toolchains/node:linux_amd64 --config=release -- --norun
 
-docker image tag bazel/stacks/api:image spicaengine/api:$TAG
+docker image tag bazel/apps/api:image spicaengine/api:$TAG
 
 if [ "$BUILD_CLIENT" != false ]; then
- yarn --cwd stacks/spica ng build --prod
+ yarn --cwd apps/spica ng build --prod
 fi 
 
-$BAZEL run //stacks/spica --platforms=@build_bazel_rules_nodejs//toolchains/node:linux_amd64 --config=release -- --norun
+$BAZEL run //apps/spica --platforms=@build_bazel_rules_nodejs//toolchains/node:linux_amd64 --config=release -- --norun
 
-docker image tag bazel/stacks/spica:spica spicaengine/spica:$TAG
+docker image tag bazel/apps/spica:spica spicaengine/spica:$TAG
 printf "\033c"
 echo "Images build and loaded to docker as  spicaengine/spica:$TAG  and spicaengine/api:$TAG"
 echo "to serve an instance with these images, you can use the CLI by invoking the command below in your terminal"

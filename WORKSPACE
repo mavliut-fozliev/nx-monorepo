@@ -27,8 +27,8 @@ yarn_install(
 
 yarn_install(
     name = "npm_cli",
-    package_json = "//stacks/cli:package.json",
-    yarn_lock = "//stacks/cli:yarn.lock",
+    package_json = "//apps/cli:package.json",
+    yarn_lock = "//apps/cli:yarn.lock",
 )
 
 # Setup docker workspace

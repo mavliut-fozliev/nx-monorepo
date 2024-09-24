@@ -1,0 +1,16 @@
+load("//tools/ts_project:index.bzl", "ts_project")
+
+package(default_visibility = ["//visibility:public"])
+
+ts_project(
+    name = "javascript",
+    package_name = "@spica-server/function/compiler/javascript",
+    srcs = glob([
+        "index.ts",
+        "src/*.ts",
+    ]),
+    deps = [
+        "//apps/api/function/compiler",
+        "@npm//@types/node",
+    ],
+)
