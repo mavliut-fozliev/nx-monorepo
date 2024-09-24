@@ -29,8 +29,7 @@
     "bazel": "bazelisk",
     "postinstall": "patch-package",
     "run-api": "bazel run //apps/api/src:bin",
-    "run-cli": "bazel run //apps/cli:bin",
-    "build": "cd apps/api && webpack --config webpack.config.js"
+    "run-cli": "bazel run //apps/cli:bin"
   },
   "dependencies": {
     "@google-cloud/storage": "^5.0.1",
@@ -134,6 +133,9 @@
     "@bazel/typescript": "^4.6.0",
     "@bazel/worker": "^4.6.0",
     "@nestjs/testing": "^7.0.13",
+    "@nx/devkit": "^19.8.0",
+    "@nx/node": "^19.8.0",
+    "@nx/webpack": "19.8.0",
     "@rollup/plugin-commonjs": "^16.0.0",
     "@rollup/plugin-json": "^4.1.0",
     "@rollup/plugin-node-resolve": "^10.0.0",

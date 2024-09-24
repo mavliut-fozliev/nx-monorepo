@@ -1,7 +1,5 @@
 {
   "compilerOptions": {
-    "rootDir": ".",
-
     "module": "CommonJS",
     "declaration": true,
     "removeComments": true,
