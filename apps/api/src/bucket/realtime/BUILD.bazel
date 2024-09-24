@@ -1,0 +1,30 @@
+load("//tools/ts_project:index.bzl", "ts_project")
+
+package(default_visibility = ["//visibility:public"])
+
+ts_project(
+    name = "realtime",
+    package_name = "@spica-server/bucket/realtime",
+    srcs = glob([
+        "src/*.ts",
+        "index.ts",
+    ]),
+    deps = [
+        "//packages/core/patch",
+        "//packages/core/schema",
+        "//packages/database",
+        "//packages/database/realtime",
+        "//apps/api/src/activity/services",
+        "//apps/api/src/bucket/cache",
+        "//apps/api/src/bucket/common",
+        "//apps/api/src/bucket/expression",
+        "//apps/api/src/bucket/history",
+        "//apps/api/src/bucket/hooks",
+        "//apps/api/src/bucket/services",
+        "//apps/api/src/passport",
+        "@npm//@nestjs/common",
+        "@npm//@nestjs/core",
+        "@npm//@nestjs/websockets",
+        "@npm//rxjs",
+    ],
+)

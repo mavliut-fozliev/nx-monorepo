@@ -2,12 +2,12 @@
 set -u -e -o pipefail
 
 echo "Building database, bucket, identity and storage packages"
-yarn bazel build //apps/api/function/packages/database:package //apps/api/function/packages/bucket:package //apps/api/function/packages/identity:package //apps/api/function/packages/storage:package
+yarn bazel build //apps/api/src/function/packages/database:package //apps/api/src/function/packages/bucket:package //apps/api/src/function/packages/identity:package //apps/api/src/function/packages/storage:package
 
-(cd "./bazel-bin/apps/api/function/packages/database/package")
-(cd "./bazel-bin/apps/api/function/packages/bucket/package")
-(cd "./bazel-bin/apps/api/function/packages/identity/package")
-(cd "./bazel-bin/apps/api/function/packages/storage/package")
+(cd "./bazel-bin/apps/api/src/function/packages/database/package")
+(cd "./bazel-bin/apps/api/src/function/packages/bucket/package")
+(cd "./bazel-bin/apps/api/src/function/packages/identity/package")
+(cd "./bazel-bin/apps/api/src/function/packages/storage/package")
 
 
 
@@ -24,12 +24,12 @@ do
   IDENTITY_PATH="$DIR/node_modules/@spica-devkit/identity"
   STORAGE_PATH="$DIR/node_modules/@spica-devkit/storage"
 
-  (mkdir -p $DATABASE_PATH && rsync -ar --no-owner --no-group ./bazel-bin/apps/api/function/packages/database/package/* $DATABASE_PATH)
+  (mkdir -p $DATABASE_PATH && rsync -ar --no-owner --no-group ./bazel-bin/apps/api/src/function/packages/database/package/* $DATABASE_PATH)
   (cd $DATABASE_PATH && npm install)
-  (mkdir -p $BUCKET_PATH && rsync -ar --no-owner --no-group ./bazel-bin/apps/api/function/packages/bucket/package/* $BUCKET_PATH)
+  (mkdir -p $BUCKET_PATH && rsync -ar --no-owner --no-group ./bazel-bin/apps/api/src/function/packages/bucket/package/* $BUCKET_PATH)
   (cd $BUCKET_PATH && npm install)
-  (mkdir -p $IDENTITY_PATH && rsync -ar --no-owner --no-group ./bazel-bin/apps/api/function/packages/identity/package/* $IDENTITY_PATH)
+  (mkdir -p $IDENTITY_PATH && rsync -ar --no-owner --no-group ./bazel-bin/apps/api/src/function/packages/identity/package/* $IDENTITY_PATH)
   (cd $IDENTITY_PATH && npm install)
-  (mkdir -p $STORAGE_PATH && rsync -ar --no-owner --no-group ./bazel-bin/apps/api/function/packages/storage/package/* $STORAGE_PATH)
+  (mkdir -p $STORAGE_PATH && rsync -ar --no-owner --no-group ./bazel-bin/apps/api/src/function/packages/storage/package/* $STORAGE_PATH)
   (cd $STORAGE_PATH && npm install)
 done

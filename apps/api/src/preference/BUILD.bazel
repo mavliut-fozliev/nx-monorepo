@@ -1,0 +1,24 @@
+load("//tools/ts_project:index.bzl", "ts_project")
+
+package(default_visibility = ["//visibility:public"])
+
+ts_project(
+    name = "preference",
+    package_name = "@spica-server/preference",
+    srcs = glob([
+        "src/**/*.ts",
+        "index.ts",
+    ]),
+    deps = [
+        "//packages/database",
+        "//packages/interface/representative",
+        "//apps/api/src/activity/services",
+        "//apps/api/src/passport",
+        "//apps/api/src/preference/services",
+        "//apps/api/src/versioncontrol",
+        "@npm//@nestjs/common",
+        "@npm//@nestjs/core",
+        "@npm//@types/mongodb",
+        "@npm//rxjs",
+    ],
+)

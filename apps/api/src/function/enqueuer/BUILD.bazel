@@ -1,0 +1,31 @@
+load("//tools/ts_project:index.bzl", "ts_project")
+
+package(default_visibility = ["//visibility:public"])
+
+ts_project(
+    name = "enqueuer",
+    package_name = "@spica-server/function/enqueuer",
+    srcs = glob([
+        "src/*.ts",
+        "index.ts",
+    ]),
+    deps = [
+        "//packages/core",
+        "//packages/database",
+        "//apps/api/src/status/services",
+        "//apps/api/src/replication",
+        "//apps/api/src/function/queue",
+        "//apps/api/src/function/queue/proto",
+        "@npm//@types/node",
+        "@npm//@types/express",
+        "@npm//express",
+        # Schedule
+        "@npm//cron",
+        "@npm//uniqid",
+        # Firehose
+        "@npm//ws",
+        "@npm//@types/ws",
+        # System
+        "@npm//rxjs",
+    ],
+)

@@ -1,0 +1,51 @@
+load("//tools/ts_project:index.bzl", "ts_project")
+
+package(default_visibility = ["//visibility:public"])
+
+load("@npm//@bazel/jasmine:index.bzl", "jasmine_node_test")
+
+ts_project(
+    name = "test_lib",
+    srcs = glob(
+        include = ["storage.spec.ts"],
+    ),
+    tsconfig = "//apps/api/src/function/packages:tsconfig",
+    deps = [
+        "//apps/api/src/function/packages/internal_common",
+        "//apps/api/src/function/packages/storage",
+        "@npm//@types/jasmine",
+        "@npm//bson",
+    ],
+)
+
+jasmine_node_test(
+    name = "test",
+    srcs = [":test_lib"],
+)
+
+ts_project(
+    name = "test_lib_integration",
+    testonly = True,
+    srcs = glob(
+        include = ["storage.integration.spec.ts"],
+    ),
+    tsconfig = "//apps/api/src/function/packages:tsconfig",
+    deps = [
+        "//packages/core/schema",
+        "//packages/core/testing",
+        "//packages/database/testing",
+        "//apps/api/src/function/packages/internal_common",
+        "//apps/api/src/function/packages/storage",
+        "//apps/api/src/passport/testing",
+        "//apps/api/src/storage",
+        "@npm//@nestjs/common",
+        "@npm//@nestjs/testing",
+        "@npm//@types/jasmine",
+        "@npm//bson",
+    ],
+)
+
+jasmine_node_test(
+    name = "test_integration",
+    srcs = [":test_lib_integration"],
+)

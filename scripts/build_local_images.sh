@@ -24,9 +24,9 @@ BUILD_CLIENT=${2:-false}
 
 BAZEL=$(yarn bin bazelisk)
 
-$BAZEL run //apps/api:image --platforms=@build_bazel_rules_nodejs//toolchains/node:linux_amd64 --config=release -- --norun
+$BAZEL run //apps/api/src:image --platforms=@build_bazel_rules_nodejs//toolchains/node:linux_amd64 --config=release -- --norun
 
-docker image tag bazel/apps/api:image spicaengine/api:$TAG
+docker image tag bazel/apps/api/src:image spicaengine/api:$TAG
 
 if [ "$BUILD_CLIENT" != false ]; then
  yarn --cwd apps/spica ng build --prod

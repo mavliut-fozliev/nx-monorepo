@@ -1,0 +1,19 @@
+load("//tools/ts_project:index.bzl", "ts_project")
+
+package(default_visibility = ["//visibility:public"])
+
+ts_project(
+    name = "activity",
+    package_name = "@spica-server/activity",
+    srcs = glob([
+        "src/*.ts",
+        "index.ts",
+    ]),
+    deps = [
+        "//packages/core",
+        "//packages/database",
+        "//apps/api/src/activity/services",
+        "//apps/api/src/passport",
+        "@npm//@nestjs/common",
+    ],
+)

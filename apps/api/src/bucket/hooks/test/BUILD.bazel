@@ -1,0 +1,73 @@
+load("//tools/ts_project:index.bzl", "ts_project")
+
+package(default_visibility = ["//visibility:public"])
+
+load("@npm//@bazel/jasmine:index.bzl", "jasmine_node_test")
+
+ts_project(
+    name = "hook_test_lib",
+    testonly = True,
+    srcs = [
+        "enqueuer.spec.ts",
+        "module.spec.ts",
+    ],
+    deps = [
+        "//packages/core/schema",
+        "//packages/database",
+        "//packages/database/testing",
+        "//apps/api/src/bucket/hooks",
+        "//apps/api/src/bucket/hooks/proto",
+        "//apps/api/src/bucket/hooks/proto/node",
+        "//apps/api/src/bucket/services",
+        "//apps/api/src/function",
+        "//apps/api/src/function/queue",
+        "//apps/api/src/function/queue/proto",
+        "//apps/api/src/preference/testing",
+        "@npm//@nestjs/common",
+        "@npm//@nestjs/testing",
+        "@npm//@types/jasmine",
+        "@npm//rxjs",
+    ],
+)
+
+jasmine_node_test(
+    name = "hook_test",
+    deps = [
+        ":hook_test_lib",
+    ],
+)
+
+ts_project(
+    name = "integration_test_lib",
+    testonly = True,
+    srcs = [
+        "integration.spec.ts",
+    ],
+    deps = [
+        "//packages/core",
+        "//packages/core/testing",
+        "//packages/core/websocket",
+        "//packages/database/testing",
+        "//apps/api/src/bucket",
+        "//apps/api/src/bucket/services",
+        "//apps/api/src/function",
+        "//apps/api/src/function/services",
+        "//apps/api/src/passport/testing",
+        "//apps/api/src/preference/testing",
+        "//apps/api/src/replication/testing",
+        "@npm//@nestjs/common",
+        "@npm//@nestjs/testing",
+        "@npm//@types/jasmine",
+        "@npm//@types/node",
+    ],
+)
+
+jasmine_node_test(
+    name = "integration_test",
+    tags = [
+        "e2e",
+    ],
+    deps = [
+        ":integration_test_lib",
+    ],
+)

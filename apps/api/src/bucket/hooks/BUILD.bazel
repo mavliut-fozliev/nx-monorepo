@@ -1,0 +1,31 @@
+load("//tools/ts_project:index.bzl", "ts_project")
+
+package(default_visibility = ["//visibility:public"])
+
+ts_project(
+    name = "hooks",
+    package_name = "@spica-server/bucket/hooks",
+    srcs = glob([
+        "src/*.ts",
+    ]) + ["index.ts"],
+    deps = [
+        "//packages/core",
+        "//packages/core/schema",
+        "//packages/database",
+        "//apps/api/src/bucket/hooks/proto",
+        "//apps/api/src/bucket/services",
+        "//apps/api/src/function",
+        "//apps/api/src/function/enqueuer",
+        "//apps/api/src/function/queue",
+        "//apps/api/src/function/queue/proto",
+        "//apps/api/src/function/scheduler",
+        "//apps/api/src/function/services",
+        "//apps/api/src/preference",
+        "@npm//@grpc/grpc-js",
+        "@npm//@nestjs/common",
+        "@npm//@types/json-schema",
+        "@npm//@types/node",
+        "@npm//rxjs",
+        "@npm//uniqid",
+    ],
+)

@@ -1,0 +1,54 @@
+load("//tools/ts_project:index.bzl", "ts_project")
+
+package(default_visibility = ["//visibility:public"])
+
+load("@npm//@bazel/jasmine:index.bzl", "jasmine_node_test")
+
+ts_project(
+    name = "node_test_lib",
+    testonly = True,
+    srcs = [
+        "node.spec.ts",
+    ],
+    deps = [
+        "//apps/api/src/function/runtime",
+        "//apps/api/src/function/runtime/node",
+        "//apps/api/src/function/runtime/testing",
+        "@npm//@types/jasmine",
+        "@npm//@types/node",
+    ],
+)
+
+jasmine_node_test(
+    name = "node_test",
+    srcs = [":node_test_lib"],
+    tags = [
+        "flaky",
+    ],
+)
+
+ts_project(
+    name = "entrypoint_test_lib",
+    testonly = True,
+    srcs = [
+        "entrypoint.spec.ts",
+    ],
+    deps = [
+        "//apps/api/src/function/compiler",
+        "//apps/api/src/function/compiler/javascript",
+        "//apps/api/src/function/compiler/typescript",
+        "//apps/api/src/function/queue",
+        "//apps/api/src/function/queue/proto",
+        "//apps/api/src/function/runtime",
+        "//apps/api/src/function/runtime/node",
+        "//apps/api/src/function/runtime/testing",
+        "@npm//@types/jasmine",
+        "@npm//@types/node",
+        "@npm//qs",
+    ],
+)
+
+jasmine_node_test(
+    name = "entrypoint_test",
+    srcs = [":entrypoint_test_lib"],
+)

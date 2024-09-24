@@ -1,0 +1,32 @@
+load("//tools/ts_project:index.bzl", "ts_project")
+
+package(default_visibility = ["//visibility:public"])
+
+load("@npm//@bazel/jasmine:index.bzl", "jasmine_node_test")
+
+ts_project(
+    name = "scheduler",
+    testonly = True,
+    srcs = glob(["*.ts"]),
+    deps = [
+        "//packages/database/testing",
+        "//apps/api/src/function/queue",
+        "//apps/api/src/function/queue/proto",
+        "//apps/api/src/function/runtime",
+        "//apps/api/src/function/runtime/testing",
+        "//apps/api/src/function/scheduler",
+        "//apps/api/src/replication/testing",
+        "@npm//@nestjs/common",
+        "@npm//@nestjs/platform-express",
+        "@npm//@nestjs/testing",
+        "@npm//@types/jasmine",
+        "@npm//@types/node",
+        "@npm//express",
+    ],
+)
+
+jasmine_node_test(
+    name = "scheduler_test",
+    srcs = [":scheduler"],
+    tags = ["flaky"],
+)

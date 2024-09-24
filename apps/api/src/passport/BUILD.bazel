@@ -1,0 +1,53 @@
+load("//tools/ts_project:index.bzl", "ts_project")
+
+package(default_visibility = ["//visibility:public"])
+
+load("//tools/dgeni:index.bzl", "docs")
+
+ts_project(
+    name = "passport",
+    package_name = "@spica-server/passport",
+    srcs = glob([
+        "index.ts",
+        "src/**/*.ts",
+        "src/schemas/*.json",
+    ]),
+    deps = [
+        "//packages/core",
+        "//packages/core/schema",
+        "//packages/database",
+        "//apps/api/src/passport/apikey",
+        "//apps/api/src/passport/authfactor",
+        "//apps/api/src/passport/guard",
+        "//apps/api/src/passport/identity",
+        "//apps/api/src/passport/policy",
+        "//apps/api/src/preference/services",
+        "//apps/api/src/replication",
+        "@npm//@nestjs/common",
+        "@npm//@nestjs/passport",
+        "@npm//@types/body-parser",
+        "@npm//@types/node-forge",
+        "@npm//@types/saml2-js",
+        "@npm//axios",
+        "@npm//body-parser",
+        "@npm//node-forge",
+        "@npm//nodemailer",
+        "@npm//rxjs",
+        "@npm//saml2-js",
+        "@npm//uuid",
+    ],
+)
+
+docs(
+    name = "docs",
+    srcs = [
+        "src/passport.controller.ts",
+    ],
+    doc_name = "passport",
+    exports = [
+        "passport",
+    ],
+    deps = [
+        "//packages/database",
+    ],
+)

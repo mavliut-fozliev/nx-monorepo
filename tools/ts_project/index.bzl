@@ -1,7 +1,7 @@
 load("@npm//@bazel/typescript:index.bzl", _ts_project = "ts_project")
 load("@build_bazel_rules_nodejs//:index.bzl", "js_library")
 
-def ts_project(name, srcs, deps, package_name = None, tsconfig = "//:tsconfig.json", data = [], **kwargs):
+def ts_project(name, srcs, deps, package_name = None, tsconfig = "//:tsconfig.base.json", data = [], **kwargs):
     testonly = kwargs.pop("testonly", False)
     if "module_name" in kwargs.keys():
         fail("module_name is not supported, run: yarn buildozer 'rename module_name package_name' %s:%s" % (native.package_name(), name))

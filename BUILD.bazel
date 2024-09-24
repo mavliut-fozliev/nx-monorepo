@@ -2,7 +2,7 @@ package(default_visibility = ["//visibility:public"])
 
 load("@k8s_deploy//:defaults.bzl", "k8s_deploy")
 
-exports_files(["tsconfig.json"])
+exports_files(["tsconfig.base.json"])
 
 filegroup(
     name = "spica",
@@ -15,7 +15,7 @@ filegroup(
 k8s_deploy(
     name = "deploy",
     images = {
-        "spicaengine/api:master": "//apps/api:image",
+        "spicaengine/api:master": "//apps/api/src:image",
         "spicaengine/spica:master": "//apps/spica",
         "spicaengine/mongoreplicationcontroller:master": "//tools/mongoreplicationcontroller:image",
     },

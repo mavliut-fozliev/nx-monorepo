@@ -1,0 +1,33 @@
+load("//tools/ts_project:index.bzl", "ts_project")
+
+package(default_visibility = ["//visibility:public"])
+
+ts_project(
+    name = "scheduler",
+    package_name = "@spica-server/function/scheduler",
+    srcs = glob([
+        "src/*.ts",
+        "index.ts",
+    ]),
+    deps = [
+        "//packages/core",
+        "//packages/database",
+        "//apps/api/src/function/compiler",
+        "//apps/api/src/function/compiler/javascript",
+        "//apps/api/src/function/compiler/typescript",
+        "//apps/api/src/function/enqueuer",
+        "//apps/api/src/function/pkgmanager",
+        "//apps/api/src/function/pkgmanager/node",
+        "//apps/api/src/function/queue",
+        "//apps/api/src/function/queue/proto",
+        "//apps/api/src/function/runtime",
+        "//apps/api/src/function/runtime/io",
+        "//apps/api/src/function/runtime/node",
+        "//apps/api/src/replication",
+        "//apps/api/src/status/services",
+        "@npm//@nestjs/common",
+        "@npm//@nestjs/core",
+        "@npm//@types/node",
+        "@npm//uniqid",
+    ],
+)

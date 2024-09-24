@@ -1,0 +1,39 @@
+load("//tools/ts_project:index.bzl", "ts_project")
+load("@npm//@bazel/jasmine:index.bzl", "jasmine_node_test")
+
+ts_project(
+    name = "status_e2e_test_lib",
+    testonly = True,
+    srcs = [
+        "controller.spec.ts",
+    ],
+    deps = [
+        "//packages/core",
+        "//packages/core/schema",
+        "//packages/core/testing",
+        "//packages/core/websocket",
+        "//packages/database/testing",
+        "//apps/api/src/bucket",
+        "//apps/api/src/function",
+        "//apps/api/src/passport/identity",
+        "//apps/api/src/passport/policy",
+        "//apps/api/src/passport/testing",
+        "//apps/api/src/preference/testing",
+        "//apps/api/src/replication/testing",
+        "//apps/api/src/status",
+        "//apps/api/src/storage",
+        "@npm//@nestjs/common",
+        "@npm//@nestjs/testing",
+        "@npm//@types/jasmine",
+        "@npm//@types/node",
+        "@npm//bson",
+    ],
+)
+
+jasmine_node_test(
+    name = "status_e2e_test",
+    tags = ["flaky"],
+    deps = [
+        ":status_e2e_test_lib",
+    ],
+)

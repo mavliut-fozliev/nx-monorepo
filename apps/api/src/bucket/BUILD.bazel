@@ -1,0 +1,62 @@
+load("//tools/ts_project:index.bzl", "ts_project")
+
+package(default_visibility = ["//visibility:public"])
+
+load("//tools/dgeni:index.bzl", "docs")
+
+ts_project(
+    name = "bucket",
+    package_name = "@spica-server/bucket",
+    srcs = glob([
+        "src/**/*.ts",
+        "src/schemas/*.json",
+        "index.ts",
+    ]),
+    deps = [
+        "//packages/core",
+        "//packages/core/differ",
+        "//packages/core/patch",
+        "//packages/core/schema",
+        "//packages/database",
+        "//packages/interface/representative",
+        "//apps/api/src/activity/services",
+        "//apps/api/src/asset",
+        "//apps/api/src/bucket/cache",
+        "//apps/api/src/bucket/common",
+        "//apps/api/src/bucket/expression",
+        "//apps/api/src/bucket/graphql",
+        "//apps/api/src/bucket/history",
+        "//apps/api/src/bucket/hooks",
+        "//apps/api/src/bucket/hooks/proto",
+        "//apps/api/src/bucket/realtime",
+        "//apps/api/src/bucket/services",
+        "//apps/api/src/passport",
+        "//apps/api/src/passport/guard",
+        "//apps/api/src/preference",
+        "//apps/api/src/preference/services",
+        "//apps/api/src/status",
+        "//apps/api/src/versioncontrol",
+        "@npm//@nestjs/common",
+        "@npm//@nestjs/core",
+        "@npm//@types/json-schema",
+        "@npm//@types/mongodb",
+        "@npm//@types/node",
+        "@npm//cron",
+        "@npm//rxjs",
+    ],
+)
+
+docs(
+    name = "docs",
+    srcs = glob(["**/*.ts"]),
+    doc_name = "bucket",
+    tags = ["bucket-docs"],
+    exports = [
+        "bucket",
+        "data",
+    ],
+    deps = [
+        "//packages/database",
+        "//apps/api/src/passport",
+    ],
+)
