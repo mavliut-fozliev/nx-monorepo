@@ -8,7 +8,7 @@
     "properties": {
       "title": {
         "type": "string",
-        "description": "Title of the configuration that will be displayed on the top of this configuration while others configuring it before install.",
+        "description": "Title of the configuration that will be displayed on the top of this configuration while others configuring it before install."
       },
       "module": {
         "type": "string",
