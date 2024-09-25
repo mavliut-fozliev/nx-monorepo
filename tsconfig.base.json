@@ -15,7 +15,8 @@
     "lib": ["es2018", "dom"],
     "paths": {
       "@spica-server/*": ["./packages/*", "./apps/api/src/*"],
-      "@spica/*": ["./apps/*"]
+      "@spica/*": ["./apps/*"],
+      "@spica-devkit/*": ["./apps/api/src/function/packages/*"]
     }
   },
   "exclude": ["node_modules", "tmp", "dist", "bazel-*"]
